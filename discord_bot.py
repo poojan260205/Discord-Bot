@@ -1,4 +1,4 @@
-""" A basic template for a discord bot."""
+
 import discord
 import re
 class MyClient(discord.Client):
