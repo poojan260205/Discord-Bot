@@ -1,6 +1,5 @@
-hello
 On which continent can you find Canada?
-How many provinces are there is Canada?
+How many provinces are there in Canada?
 Approximately how many people live in Canada?
 What are the primary languages spoken in Canada?
 Identify the most expansive province in Canada.
@@ -12,11 +11,33 @@ What is the largest city in Canada?
 What is the historical significance of St. John's, Newfoundland in Canada?
 On which date is Canada day Celebrated?
 Who is the Prime minister of Canada as of January 2024?
-What major mountain range is located on western coast of Canada?
-Which Canadian province has highest number of residents?
+What mountain range is on the western coast of Canada?
+Which Canadian province has the highest number of residents?
 What structure holds the title of Canada's tallest building?
 Which is the highest mountain of Canada?
 Which river of Canada is renowned for its remarkable length?
 Who is currently recognized as the richest person in Canada?
-Who was the first prime minister of Canada?
-goodbye
+Who was the 1st prime minister of Canada?
+
+In which continent would you find Canada?
+What's the total number of provinces in Canada?
+Around how many people reside in Canada?
+What languages are Canada's primary spoken languages?
+Whats is the largest province in Canada area-wise?
+Which city holds the capital status of Canada?
+What sports are recognized as national sport of Canada?
+What is the currency of Canada?
+Whart's called the national anthem in Canada?
+Which city is considered the largest city in Canada?
+What is St. John's, Newfoundland significance in Canadian history?
+On what date do Canada Day is celebrated in Canada?
+Who holds the Prime minister position in Canada, as of January 2024.?
+Which mountain range lies along the western coast of Canada?
+In Canada, what province has the most population?
+What is the highest structure in Canada?
+Which is the tallest peak in Canada?
+What is the name of the longest river in Canada?
+Currently, who is the richest person in Canada?
+Name the first prime minister of Canada?
+
+

@@ -1,59 +1,71 @@
-""" This is a very simple script to put the FAQ bot skeleton code on line
-as a discord bot. If you follow the structure of the skeleton code, you should
-not have to make any major changes here to get your bot on line.
+"""
+The following code is the code that connects to discord. The code imports all the necessary functions from faq_bot_skeleton so that the bot on discord functions in the same way as it does in the pyzo shell.
 
-However you should at least rename faq_bot_skeleton.py, which means you'll have
-to change the import line below.
+The following code handles the connection to discord and generate answers after calling appropriate functions from faq_bot_template. It also handles appropriate response to greetings and goodbye messages in discord.
 
-Note that the bot defined here will respond to EVERY message in every server it
-is invited to. It is possible to have it only respond to messages that are
-@ it, or only to private messages instead. I will leave it to you to figure that
-out!
+Author: Poojan Patel
+Date: February, 2024
+Student id: 000901579
 
-If you adapt this code, add yourself below as author and rewrite this header
-comment from scratch. Make sure you properly comment all classes, methods
-and functions as well. See the Resources folder on Canvas for documentation
-standards.
-
-YOUR NAME AND DATE
-Sam Scott, Mohawk College, May 2023
 """
 import discord
-from faq_bot_skeleton import *
+from faq_bot_skeleton import load_FAQ_data, understand, spaCy_faq
 
-## MYClient Class Definition
 
 class MyClient(discord.Client):
-    """Class to represent the Client (bot user)"""
-
+    #Initialization method for discord client
+    """
+    The following function __init__ starts the discord client with proper intents and also loads the proper Data
+    """
     def __init__(self):
-        """This is the constructor. Sets the default 'intents' for the bot."""
-        intents = discord.Intents.default()
-        intents.message_content = True
+        intents = discord.Intents.default() #intents to handle messages
+        intents.message_content = True #Enable message content to read message
         super().__init__(intents=intents)
+        #Load FAQ data from appropriate files
+        self.questions, self.answers, self.regex_patterns = load_FAQ_data()
 
+    """
+    Prints appropriate statement when the connection is made
+        """
     async def on_ready(self):
-        """Called when the bot is fully logged in."""
-        print('Logged on as', self.user)
+        print(f'Logged on as {self.user}')
 
+    #Method to handle messages and prevent creating infinite loops
+    """
+    Handles the questions and gives answer appropriately
+
+    Process user messages for greetings and goodbye and also calls understand function and spaCy_function from faq_bot_template and                         gives appropriate answer as per the question asked.
+    """
     async def on_message(self, message):
-        """Called whenever the bot receives a message. The 'message' object
-        contains all the pertinent information."""
 
-        # don't respond to ourselves
-        if message.author == self.user:
+        if message.author == self.user or message.author.bot:
             return
 
-        # get the utterance and generate the response
-        utterance = message.content
-        intent = understand(utterance)
-        response = generate(intent)
+        user_input = message.content #Extract content of message
+        user_input_lower = user_input.lower() #Converts message to lowercase to make case insensitive
 
-        # send the response
+        # Handle greetings and goodbye messages in discord
+        if user_input_lower in ['hello', 'hi', 'hey']:
+            await message.channel.send("Hello! How can I assist you?")
+            return
+
+        if user_input_lower in ['goodbye', 'bye', 'quit', 'exit']:
+            await message.channel.send("Goodbye! Have a great day.")
+            return
+
+        #Process user questions through faq data
+        match_index = understand(user_input, self.questions, self.regex_patterns)
+        #if matching is found give corresponding answer and if not found use spacy function to generate answers
+        if match_index != -1:
+            response = self.answers[match_index]
+        else:
+            response = spaCy_faq(user_input)
+
         await message.channel.send(response)
 
-## Set up and log in
-client = MyClient()
-with open("bot_token.txt") as file:
-    token = file.read()
-client.run(token)
+if __name__ == "__main__":
+    client = MyClient()
+    #Read the bot token from bot_token.txt file
+    with open("bot_token.txt") as file:
+        token = file.read().strip()
+    client.run(token)
